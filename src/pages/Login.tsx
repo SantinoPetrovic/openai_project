@@ -8,7 +8,8 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [credentials, setCredentials] = useState({
     username: '',
-    password: ''
+    password: '',
+    email: ''
   });
   const [error, setError] = useState('');
 

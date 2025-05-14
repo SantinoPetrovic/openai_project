@@ -1,5 +1,6 @@
 interface LoginCredentials {
   username: string;
+  email: string;
   password: string;
 }
 
@@ -7,12 +8,13 @@ interface AuthResponse {
   token: string;
   user: {
     id: number;
+    email: string;
     username: string;
   };
   expiration: string;
 }
 
-const LOGIN_URL = `${process.env.API_URL}/users/login`;
+const LOGIN_URL = `${process.env.API_URL}/auth/login`;
 
 export const authService = {
 
@@ -62,13 +64,13 @@ export const authService = {
     return token;
   },
 
-  storeAuthData(token: string, expiration: string, user: { id: number; username: string }): void {
+  storeAuthData(token: string, expiration: string, user: { id: number, username: string, email: string }): void {
     localStorage.setItem('token', token);
     localStorage.setItem('expired', expiration);
     localStorage.setItem('user', JSON.stringify(user));
   },
 
-  getUser(): { id: number; username: string } | null {
+  getUser(): { id: number; username: string, email: string } | null {
     const raw = localStorage.getItem('user');
     if (!raw) return null;
 

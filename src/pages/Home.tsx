@@ -6,6 +6,7 @@ const Home = () => {
   const navigate = useNavigate();
   const isLoggedIn = authService.isAuthenticated();
   const user = authService.getUser();
+  console.log('user: ', user)
   const username = user?.username ?? 'Undefined';
 
   return (
