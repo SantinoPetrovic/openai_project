@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { authService } from '../services/AuthService';
 
@@ -6,7 +5,6 @@ const Home = () => {
   const navigate = useNavigate();
   const isLoggedIn = authService.isAuthenticated();
   const user = authService.getUser();
-  console.log('user: ', user)
   const username = user?.username ?? 'Undefined';
 
   return (

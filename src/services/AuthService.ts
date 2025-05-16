@@ -1,4 +1,4 @@
-interface LoginCredentials {
+interface UserCredentials {
   username: string;
   email: string;
   password: string;
@@ -15,6 +15,7 @@ interface AuthResponse {
 }
 
 const LOGIN_URL = `${process.env.API_URL}/auth/login`;
+const REGISTER_URL = `${process.env.API_URL}/auth/register`;
 
 export const authService = {
 
@@ -23,7 +24,7 @@ export const authService = {
     return !!token;
   },
 
-  async login(credentials: LoginCredentials): Promise<AuthResponse> {
+  async login(credentials: UserCredentials): Promise<AuthResponse> {
 
     const response = await fetch(LOGIN_URL, {
       method: 'POST',
@@ -35,6 +36,27 @@ export const authService = {
     
     if (!response.ok) {
       throw new Error('Login failed');
+    }
+
+    const data: AuthResponse = await response.json();
+
+    this.storeAuthData(data.token, data.expiration, data.user);
+
+    return data;
+  },
+
+  async register(credentials: UserCredentials): Promise<AuthResponse> {
+
+    const response = await fetch(REGISTER_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(credentials),
+    });
+    
+    if (!response.ok) {
+      throw new Error('Register failed');
     }
 
     const data: AuthResponse = await response.json();
