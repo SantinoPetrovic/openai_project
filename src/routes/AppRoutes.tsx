@@ -11,6 +11,7 @@ const AppRoutes: React.FC = () => (
     <Route path="/" element={<Home />} />
     <Route path="/login" element={<Login />} />
     <Route path="/register" element={<Register />} />
+    <Route path="/chat" element={<Chat />} />
     <Route path="/chat/:chatId" element={<Chat />} />
   </Routes>
 );

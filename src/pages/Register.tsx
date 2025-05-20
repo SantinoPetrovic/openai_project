@@ -24,7 +24,7 @@ const Register = () => {
         navigate('/');
       }
     } catch (err) {
-      setError('Register failed. Check your credentials.');
+      if (err instanceof Error) setError(err.message);
     } finally {
       setIsLoading(false);
     }

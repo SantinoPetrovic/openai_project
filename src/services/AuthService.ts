@@ -56,7 +56,8 @@ export const authService = {
     });
     
     if (!response.ok) {
-      throw new Error('Register failed');
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'Registration failed');
     }
 
     const data: AuthResponse = await response.json();
