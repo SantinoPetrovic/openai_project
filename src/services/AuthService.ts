@@ -1,7 +1,13 @@
+import ForgottenPassword from "../pages/ForgottenPassword";
+
 interface UserCredentials {
   username: string;
   email: string;
   password: string;
+}
+
+interface ForgottenPasswordCredentials {
+  email: string;
 }
 
 interface AuthResponse {
@@ -14,8 +20,13 @@ interface AuthResponse {
   expiration: string;
 }
 
+interface ForgottenPasswordResponse {
+  status: number;
+}
+
 const LOGIN_URL = `${process.env.API_URL}/auth/login`;
 const REGISTER_URL = `${process.env.API_URL}/auth/register`;
+const FORGOTTEN_PASSWORD_URL = `${process.env.API_URL}/auth/forgotten-password`;
 
 export const authService = {
 
@@ -63,6 +74,25 @@ export const authService = {
     const data: AuthResponse = await response.json();
 
     this.storeAuthData(data.token, data.expiration, data.user);
+
+    return data;
+  },
+
+  async forgottenPassword(credentials: ForgottenPasswordCredentials): Promise<ForgottenPasswordResponse> {
+
+    const response = await fetch(FORGOTTEN_PASSWORD_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(credentials),
+    });
+    
+    if (!response.ok) {
+      throw new Error('Login failed');
+    }
+
+    const data: ForgottenPasswordResponse = await response.json();
 
     return data;
   },

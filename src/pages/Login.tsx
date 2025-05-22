@@ -97,6 +97,14 @@ const Login = () => {
               {isLoading ? 'Logging in...' : 'Log in'}
             </button>
           </div>
+          <div className="mt-4 text-center">
+            <a
+              href="/forgotten-password"
+              className="text-sm ms-2 text-blue-500 hover:underline dark:text-blue-400"
+            >
+              Forgot your password?
+            </a>
+          </div>
         </form>
       </div>
       <div className="mt-5 text-center flex">
