@@ -26,7 +26,7 @@ interface ForgottenPasswordResponse {
 
 const LOGIN_URL = `${process.env.API_URL}/auth/login`;
 const REGISTER_URL = `${process.env.API_URL}/auth/register`;
-const FORGOTTEN_PASSWORD_URL = `${process.env.API_URL}/auth/forgotten-password`;
+const FORGOTTEN_PASSWORD_URL = `${process.env.API_URL}/auth/forgot-password`;
 
 export const authService = {
 

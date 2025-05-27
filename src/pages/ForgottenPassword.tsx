@@ -39,8 +39,8 @@ const ForgottenPassword = () => {
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-900 transition-colors duration-200">
       {!isSubmit ? (
         <div className="w-full max-w-xs bg-white dark:bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4">
-          <h2 className="text-center text-2xl font-bold text-gray-900 dark:text-white">Find your user</h2>
-          <p className="text-center mt-4 text-sm text-gray-900 dark:text-white">Please enter your email which you have forgotten your password.</p>
+          <h2 className="text-center text-2xl font-bold text-gray-900 dark:text-white">Forgot password</h2>
+          <p className="text-center mt-4 text-sm text-gray-900 dark:text-white">Please enter your email.</p>
           <form className="space-y-4 mt-4" onSubmit={handleSubmit}>
             <div>
               <label className="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2" htmlFor="email">
@@ -77,7 +77,7 @@ const ForgottenPassword = () => {
         </div>
       ) : (
         <div className="w-full max-w-xs bg-white dark:bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4">
-          <p className="text-center mt-4 text-sm text-gray-900 dark:text-white">Please enter your email which you have forgotten your password.</p>
+          <p className="text-center mt-4 text-sm text-gray-900 dark:text-white">If an account with that email exists, we've sent a password reset link. Please check your email and follow the instructions to reset your password.</p>
         </div>
       )}
     </div>
