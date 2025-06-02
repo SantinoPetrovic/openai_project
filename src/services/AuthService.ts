@@ -10,6 +10,11 @@ interface ForgottenPasswordCredentials {
   email: string;
 }
 
+interface ResetPasswordCredentials {
+  newPassword: string;
+  resetToken: string;
+}
+
 interface AuthResponse {
   token: string;
   user: {
@@ -20,13 +25,15 @@ interface AuthResponse {
   expiration: string;
 }
 
-interface ForgottenPasswordResponse {
+interface StatusResponse {
   status: number;
+  error: string | undefined;
 }
 
 const LOGIN_URL = `${process.env.API_URL}/auth/login`;
 const REGISTER_URL = `${process.env.API_URL}/auth/register`;
 const FORGOTTEN_PASSWORD_URL = `${process.env.API_URL}/auth/forgot-password`;
+const RESET_PASSWORD_URL = `${process.env.API_URL}/auth/reset-password`;
 
 export const authService = {
 
@@ -78,7 +85,7 @@ export const authService = {
     return data;
   },
 
-  async forgottenPassword(credentials: ForgottenPasswordCredentials): Promise<ForgottenPasswordResponse> {
+  async forgottenPassword(credentials: ForgottenPasswordCredentials): Promise<StatusResponse> {
 
     const response = await fetch(FORGOTTEN_PASSWORD_URL, {
       method: 'POST',
@@ -89,10 +96,28 @@ export const authService = {
     });
     
     if (!response.ok) {
-      throw new Error('Login failed');
+      throw new Error('Forgotten password failed');
     }
 
-    const data: ForgottenPasswordResponse = await response.json();
+    const data: StatusResponse = await response.json();
+
+    return data;
+  },
+
+  async resetPassword(credentials: ResetPasswordCredentials): Promise<StatusResponse> {
+
+    const response = await fetch(RESET_PASSWORD_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(credentials),
+    });
+
+    const data: StatusResponse = await response.json();
+    if (!response.ok) {
+      throw new Error(data.error);
+    }
 
     return data;
   },

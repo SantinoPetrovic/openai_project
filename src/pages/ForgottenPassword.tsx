@@ -77,7 +77,7 @@ const ForgottenPassword = () => {
         </div>
       ) : (
         <div className="w-full max-w-xs bg-white dark:bg-gray-800 shadow-md rounded px-8 pt-6 pb-8 mb-4">
-          <p className="text-center mt-4 text-sm text-gray-900 dark:text-white">If an account with that email exists, we've sent a password reset link. Please check your email and follow the instructions to reset your password.</p>
+          <p className="text-xl text-center mt-4 text-sm text-gray-900 dark:text-white">If an account with that email exists, we've sent a password reset link. Please check your email and follow the instructions to reset your password.</p>
         </div>
       )}
     </div>
